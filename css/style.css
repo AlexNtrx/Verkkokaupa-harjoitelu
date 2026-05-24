@@ -112,3 +112,202 @@ main .right .price{
     color: darkred;
 
 }
+/*
+  Sivun asettelu (Layout Grid)
+  */
+body {
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 20px;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Tuotekorttien säilytys - järjestetään automaattisesti riveihin ja sarakkeisiin */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+/*
+    Tuotekortin perusrakenne (Product Card)
+  */
+.product-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    position: relative; /* Merkin paikka tuotekortin kulmassa */
+    display: flex;
+    flex-direction: column; /* Sisältö järjestetään ylhäältä alas */
+    height: 100%; /* Kaikki kortit samalla korkeudella samalla rivillä */
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover-efekti - kortti nousee hieman kursorin alla */
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Jos tuote on loppunut, kortti näkyy himmeämpänä */
+.product-card.is-out-of-stock {
+    opacity: 0.7;
+}
+
+/*
+    Merkinnän alue (Badges Area)
+   */
+.card-badges {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.badge {
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 6px;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+
+.badge-sale {
+    background-color: #ef4444; /* Punainen väri alennukselle */
+}
+
+.badge-out {
+    background-color: #64748b; /* Harmaa väri loppuneelle tuotteelle */
+}
+
+/* 
+    Tuotekuvan alue (Image Area)
+   */
+.product-img-wrapper {
+    width: 100%;
+    padding-top: 100%; /* Tekniikka neliönmuotoisen kuvan tekemiseen (1:1 Aspect Ratio) */
+    position: relative;
+    background-color: #f1f5f9;
+    overflow: hidden;
+}
+
+.product-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Leikataan kuva sopimaan kehykseen oikein */
+    transition: transform 0.3s ease;
+}
+
+/* Kuvan zoomaus hieman kursorin alla - lisää premium-tuntemusta */
+.product-card:hover .product-img {
+    transform: scale(1.05);
+}
+
+/* 
+  Sisältöalueen yksityiskohta
+   */
+.product-info {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Painetaan painike alas kaikkien korttien pohjalle */
+}
+
+.product-category {
+    font-size: 12px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+}
+
+.product-title {
+    font-size: 16px;
+    margin: 0 0 12px 0;
+    line-height: 1.4;
+    height: 44px; /* Korkeuden lukitseminen noin 2 riville - teksti ei kasaudu */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Jos yli 2 rivin pituinen, lisää ... automaattisesti */
+    -webkit-box-orient: vertical;
+}
+
+.product-title a {
+    color: #1e293b;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.product-title a:hover {
+    color: #2563eb; /* Muuta siniseksi kursorin alla tuotteen nimeen */
+}
+
+/* Hinnan alue */
+.product-price-box {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-top: auto; /* Vie hinta sisällön alaosaan */
+}
+
+.product-price {
+    font-size: 18px;
+    font-weight: 700;
+    color: #2563eb;
+}
+
+.product-original-price {
+    font-size: 13px;
+    color: #94a3b8;
+    text-decoration: line-through; /* Vedä viiva täyden hinnan yli */
+}
+
+/* 
+    Painikkeen toiminta-alue (Action Button Area)
+  */
+.product-action {
+    padding: 0 16px 16px 16px;
+}
+
+/* Painikkeen normaali tila */
+.btn-add-to-cart {
+    width: 100%;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-add-to-cart:hover {
+    background-color: #1d4ed8;
+}
+
+/* Painikkeen tila kun tuote on loppunut (Disabled) */
+.btn-out-of-stock {
+    width: 100%;
+    background-color: #cbd5e1;
+    color: #64748b;
+    border: none;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: not-allowed; /* Muuta kursorin kielletyksi merkiksi */
+}

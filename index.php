@@ -1,3 +1,12 @@
+
+<?php
+
+//  Tuotteiden tietojen haku (Backend / Data Fetching)
+
+// Luo PHP:lle käsky lukea tietokanta-tiedosto. Muuttuja $products on käytettävissä heti.
+require_once 'data/product_db.php';
+?>
+
 <!DOCTYPE html>
 <html lang="fi">
 
@@ -15,31 +24,40 @@
     <?php include 'includes/header.php'; ?>
 
 
-    <main>
-        <div class="left">
+  <main>
+       <div class="left">
             <div class="section-title">Product categories</div>
             <a href="books">Books</a>
             <a href="games">Games</a>
         </div>
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+            <h2 style="color: #1e293b; font-size: 20px; margin-bottom: 20px;">Tuotteemme</h2>
+                <div class="product-grid">
+                <?php
+                
+                //  Tuotteiden näyttäminen silmukassa (Logic / Rendering Loop)
+             
+                // Tarkistetaan, onko tuotteita. Näin estetään virheet.
+                if (isset($products) && !empty($products)) {
 
-        <div class="right">
-            <div class="section-title">Home page</div>
-            <div class="product">
+                    // Käydään jokainen tuote läpi yksitellen.
+                    foreach ($products as $product) {
 
-                <div class="product-left">
-                    <img src="./products/book.webp" alt="Product Image">
-                </div>
-                <div class="product-right">
-                    <p class='title'>
-                        <a href="books">Coding is fun</a>
-                    </p>
-                    <p class="description"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit dolorem voluptatem architecto nam voluptate accusantium magni nisi in ratione doloribus.</p>
-                    <p class="price">12$</p>
-                </div>
+                        // Otetaan tuotekortin tiedosto ja näytetään tuote.
+                        include 'components/product_cards.php';
+
+                    }
+
+                } else {
+                    // Jos tuotteita ei ole, näytetään tämä viesti.
+                    echo '<p style="text-align: center; color: #94a3b8; grid-column: 1/-1; padding: 40px 0;">Tuotteita ei ole vielä saatavilla.</p>';
+                }
+                ?>
             </div>
+
+           
         </div>
-        
-    </main>
+
 
 
     <?php include 'includes/footer.php'; ?>
