@@ -5,6 +5,7 @@
 
 // Luo PHP:lle käsky lukea tietokanta-tiedosto. Muuttuja $products on käytettävissä heti.
 require_once 'data/product_db.php';
+require 'function.php';
 ?>
 
 <!DOCTYPE html>
@@ -27,8 +28,15 @@ require_once 'data/product_db.php';
   <main>
        <div class="left">
             <div class="section-title">Product categories</div>
-            <a href="books">Books</a>
-            <a href="games">Games</a>
+            <?php $categories = getCategories(); ?>
+            <?php
+            foreach ($categories as $category) {
+               ?> <a href="category.php?category=<?php echo urlencode($category['category']) ?>">
+                <?php echo ucfirst($category['category']); ?>
+               </a>
+               <?php
+            }
+            ?>
         </div>
         <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
             <h2 style="color: #1e293b; font-size: 20px; margin-bottom: 20px;">Tuotteemme</h2>
