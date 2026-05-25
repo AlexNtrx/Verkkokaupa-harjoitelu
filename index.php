@@ -1,12 +1,21 @@
 
 <?php
 
-//  Tuotteiden tietojen haku (Backend / Data Fetching)
+require_once "data/product_db.php";
 
-// Luo PHP:lle käsky lukea tietokanta-tiedosto. Muuttuja $products on käytettävissä heti.
-require_once 'data/product_db.php';
-require 'function.php';
+// Yhdistä tietokantaan
+$mysqli = dbConnect();
+
+// Valittu kategoria URL-parametrina, tai null
+$selected_category = $_GET['category'] ?? null;
+
+// Hae tuotteet turvallisesti, varmistetaan että $products on aina taulukko
+$products = [];
+if ($mysqli) {
+        $products = getHomeProducts(8); // hakee tuotteet valitulla kategorialla (tai kaikki jos kategoria null)
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="fi">
@@ -32,33 +41,24 @@ require 'function.php';
             <?php
             foreach ($categories as $category) {
                ?> <a href="category.php?category=<?php echo urlencode($category['category']) ?>">
-                <?php echo ucfirst($category['category']); ?>
+                <?php echo ucfirst($category['category']); ?>  <!-- näytä kategorian nimi -->
                </a>
                <?php
             }
             ?>
         </div>
-        <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-            <h2 style="color: #1e293b; font-size: 20px; margin-bottom: 20px;">Tuotteemme</h2>
+        <div class="right">
+            <h2>Tuotteemme</h2>
                 <div class="product-grid">
                 <?php
-                
-                //  Tuotteiden näyttäminen silmukassa (Logic / Rendering Loop)
-             
-                // Tarkistetaan, onko tuotteita. Näin estetään virheet.
-                if (isset($products) && !empty($products)) {
-
-                    // Käydään jokainen tuote läpi yksitellen.
+                //  jos tuotteita löytyy, näytä ne kortteina; muuten näytä viesti
+                if (!empty($products)) {
                     foreach ($products as $product) {
-
-                        // Otetaan tuotekortin tiedosto ja näytetään tuote.
                         include 'components/product_cards.php';
-
                     }
-
+              
                 } else {
-                    // Jos tuotteita ei ole, näytetään tämä viesti.
-                    echo '<p style="text-align: center; color: #94a3b8; grid-column: 1/-1; padding: 40px 0;">Tuotteita ei ole vielä saatavilla.</p>';
+                    echo '<p>Tuotteita ei ole vielä saatavilla.</p>';
                 }
                 ?>
             </div>
