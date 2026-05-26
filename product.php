@@ -3,15 +3,12 @@
 
 require "function.php"; // vaatii function.php-tiedoston, joka sisältää tietokantayhteyden määrittelyt ja funktiot
 
-// Yhdistä tietokantaan
-$mysqli = dbConnect();
-
-// Hae tuotteet turvallisesti, varmistetaan että $products on aina taulukko
-?>
-<?php
-if(isset($_GET['category'])){
-    $cat = urldecode($_GET['category']);
+$title = isset($_GET['title']) ? urldecode($_GET['title']) : null;
+$product = null;
+if ($title) {
+    $product = getProductByTitle($title);
 }
+$categories = getCategories() ?: [];
 ?>
 
 <!DOCTYPE html>
@@ -20,9 +17,9 @@ if(isset($_GET['category'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Kauppa on verkkokauppa, joka tarjoaa laajan valikoiman tuotteita edulliseen hintaan.">
-    <meta name="keywords" content="verkkokauppa, edulliset tuotteet, laaja valikoima, ostokset verkossa">
-    <title>Kauppa</title>
+    <meta name="description" content="<?php echo $product[0]['meta_description'] ; ?>">
+    <meta name="keywords" content="<?php echo $product[0]['meta_keywords'] ; ?>">
+    <title><?php echo $title ; ?></title>
 </head>
 <link rel="stylesheet" href="./css/style.css">
 
@@ -45,19 +42,16 @@ if(isset($_GET['category'])){
             ?>
         </div>
         <div class="right">
-            <h2>Tuotteet kategorialla: <?php echo ucfirst($cat); ?></h2>
+            <h2>Product Details</h2>
                 <div class="product-grid">
                 <?php
-                 $products = getProductsByCategory($cat);
+    
                 //  jos tuotteita löytyy, näytä ne kortteina; muuten näytä viesti
-                if (!empty($products)) {
-                    foreach ($products as $product) {
-                        include 'components/product_cards.php';
-                    }
+            
+                        include 'components/product_details.php';
+                  
               
-                } else {
-                    echo '<p>Tuotteita ei ole vielä saatavilla.</p>';
-                }
+            
                 ?>
             </div>
 

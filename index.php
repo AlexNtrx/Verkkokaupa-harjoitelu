@@ -1,18 +1,17 @@
 
 <?php
 
-require_once "data/product_db.php";
+require "function.php"; // vaatii function.php-tiedoston, joka sisältää tietokantayhteyden määrittelyt ja funktiot
 
 // Yhdistä tietokantaan
 $mysqli = dbConnect();
 
-// Valittu kategoria URL-parametrina, tai null
-$selected_category = $_GET['category'] ?? null;
+
 
 // Hae tuotteet turvallisesti, varmistetaan että $products on aina taulukko
 $products = [];
 if ($mysqli) {
-        $products = getHomeProducts(8); // hakee tuotteet valitulla kategorialla (tai kaikki jos kategoria null)
+        $products = getHomeProducts(); // hakee kaikki tuotteet
 }
 ?>
 
