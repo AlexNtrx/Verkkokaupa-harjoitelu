@@ -17,6 +17,8 @@ header p {
         align-items: center;
         background-color: #333;
         padding: 10px;
+        gap: 5rem;
+   
     }
 
     .Kauppa {
@@ -28,7 +30,8 @@ header p {
     .links a {
         color: white;
         text-decoration: none;
-        margin-left: 20px;
+        margin-left: 40px;
+  
     }
 
     .links a:hover {
@@ -39,7 +42,6 @@ header p {
         color: white;
         text-align: center;
         padding: 10px;
-        position: fixed;
         width: 100%;
         bottom: 0;
     }
