@@ -52,7 +52,7 @@ $categories = getCategories() ?: [];
                 } else {
                     echo "<p>Product not found.</p>";   
                 }
-                  
+                
                 ?>
             </div>
 
