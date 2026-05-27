@@ -45,13 +45,14 @@ $categories = getCategories() ?: [];
             <h2>Product Details</h2>
                 <div class="product-grid">
                 <?php
-    
+        
                 //  jos tuotteita löytyy, näytä ne kortteina; muuten näytä viesti
-            
+                if ($product) {
                         include 'components/product_details.php';
+                } else {
+                    echo "<p>Product not found.</p>";   
+                }
                   
-              
-            
                 ?>
             </div>
 
