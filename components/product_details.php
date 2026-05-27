@@ -32,9 +32,18 @@
           
         </div>
     </div>
-<!-- Lisää ostoskoriin -painike -->
+
     <div class="product-action">
            <p class="description"><?php echo htmlspecialchars($product['description'] ?? '', ENT_QUOTES, 'UTF-8'); ?></p>
+       
+    </div>
+      <div class="product-action">
+            <button class="btn-add-to-cart"
+                    data-id="<?php echo htmlspecialchars($product['id'], ENT_QUOTES, 'UTF-8'); ?>"
+                    data-title="<?php echo htmlspecialchars($product['title'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"
+                    data-price="<?php echo htmlspecialchars($product['price'], ENT_QUOTES, 'UTF-8'); ?>">
+                Lisää ostoskoriin
+            </button>   
        
     </div>
 </div>
