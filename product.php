@@ -17,8 +17,8 @@ $categories = getCategories() ?: [];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="<?php echo $product[0]['meta_description'] ; ?>">
-    <meta name="keywords" content="<?php echo $product[0]['meta_keywords'] ; ?>">
+    <meta name="description" content="<?php echo $product['meta_description'] ; ?>">
+    <meta name="keywords" content="<?php echo $product['meta_keywords'] ; ?>">
     <title><?php echo $title ; ?></title>
 </head>
 <link rel="stylesheet" href="./css/style.css">
