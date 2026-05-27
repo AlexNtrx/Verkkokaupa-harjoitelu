@@ -65,11 +65,13 @@ if ($mysqli) {
            
         </div>
     </main>
-
+<div id="cart-toast" class="cart-toast hidden">
+        <p id="toast-message"></p>
+    </div>
 
     <?php include 'includes/footer.php'; ?>
 
-
+    <script src="./js/script.js"></script>
 </body>
 
 </html>

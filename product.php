@@ -63,7 +63,7 @@ $categories = getCategories() ?: [];
 
     <?php include 'includes/footer.php'; ?>
 
-
+<script src="./js/script.js"></script>
 </body>
 
 </html>
