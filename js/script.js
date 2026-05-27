@@ -1,3 +1,5 @@
+
+// lisää tapahtumankuuntelija "Lisää ostoskoriin" -painikkeille ja näytä ilmoitus, kun tuote lisätään ostoskoriin
 document.addEventListener('DOMContentLoaded', function() {
     const addToCartButtons = document.querySelectorAll('.btn-add-to-cart');
 
