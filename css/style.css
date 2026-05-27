@@ -147,6 +147,7 @@ body {
     overflow: hidden;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+
 }
 
 /* Hover-efekti - kortti nousee hieman kursorin alla */
@@ -194,11 +195,10 @@ body {
     Tuotekuvan alue (Image Area)
    */
 .product-img-wrapper {
-    width: 100%;
-    padding-top: 100%; /* Tekniikka neliönmuotoisen kuvan tekemiseen (1:1 Aspect Ratio) */
     position: relative;
-    background-color: #f1f5f9;
+    height: 200px;      /* ← sama korkeus kuin kuvalla */
     overflow: hidden;
+    background: #f8fafc; /* valinnainen: tasainen tausta contain-tilassa */
 }
 
 .product-img {
@@ -206,14 +206,10 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    object-fit: cover; /* Leikataan kuva sopimaan kehykseen oikein */
+    height: 100%;       /* ← 100% wrapperista, ei 200px kovakoodattuna */
+    object-fit: contain;
+    object-position: center;
     transition: transform 0.3s ease;
-}
-
-/* Kuvan zoomaus hieman kursorin alla - lisää premium-tuntemusta */
-.product-card:hover .product-img {
-    transform: scale(1.05);
 }
 
 /* 

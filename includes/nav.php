@@ -3,6 +3,6 @@
     <div class="links">
        <a href="index.php">Home</a>
        <a href="#">About</a>
-       <a href="contact.php">Contact</a>
+       <a href="#">Contact</a>
     </div>
 </nav>
